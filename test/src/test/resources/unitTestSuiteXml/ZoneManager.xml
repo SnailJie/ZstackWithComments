@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UnitTestSuiteConfig xmlns="http://zstack.org/schema/zstack" timeout="600">
+	<TestCase class="org.zstack.test.compute.zone.TestCreateZone" />
+	<TestCase class="org.zstack.test.compute.zone.TestDeleteZone" />
+	<TestCase class="org.zstack.test.compute.zone.TestZoneDeleteExtensionPoint" />
+	<TestCase class="org.zstack.test.compute.zone.TestChangeZoneState" />
+	<TestCase class="org.zstack.test.compute.zone.TestZoneChangeStateExtensionPoint"/>
+	<TestCase class="org.zstack.test.compute.zone.TestQueryZone"/>
+	<TestCase class="org.zstack.test.compute.zone.TestUpdateZone"/>
+</UnitTestSuiteConfig>

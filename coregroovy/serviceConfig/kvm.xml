@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service xmlns="http://zstack.org/schema/zstack">
+    <id>host</id>
+
+    <message>
+        <name>org.zstack.kvm.APIAddKVMHostMsg</name>
+        <interceptor>HostApiInterceptor</interceptor>
+        <interceptor>KVMApiInterceptor</interceptor>
+    </message>
+
+    <message>
+        <name>org.zstack.kvm.APIUpdateKVMHostMsg</name>
+    </message>
+
+    <message>
+        <name>org.zstack.kvm.APIKvmRunShellMsg</name>
+        <serviceId>kvm</serviceId>
+    </message>
+
+</service>

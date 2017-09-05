@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service xmlns="http://zstack.org/schema/zstack">
+    <interceptor>CephApiInterceptor</interceptor>
+
+    <message>
+        <name>org.zstack.storage.ceph.backup.APIAddCephBackupStorageMsg</name>
+        <serviceId>storage.backup</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.backup.APIAddMonToCephBackupStorageMsg</name>
+        <serviceId>storage.backup</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.backup.APIUpdateCephBackupStorageMonMsg</name>
+        <serviceId>storage.backup</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.backup.APIRemoveMonFromCephBackupStorageMsg</name>
+        <serviceId>storage.backup</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.backup.APIQueryCephBackupStorageMsg</name>
+        <serviceId>query</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.primary.APIAddCephPrimaryStorageMsg</name>
+        <serviceId>storage.primary</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.primary.APIAddMonToCephPrimaryStorageMsg</name>
+        <serviceId>storage.primary</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.primary.APIUpdateCephPrimaryStorageMonMsg</name>
+        <serviceId>storage.primary</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.primary.APIRemoveMonFromCephPrimaryStorageMsg</name>
+        <serviceId>storage.primary</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.primary.APIQueryCephPrimaryStorageMsg</name>
+        <serviceId>query</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.primary.APIAddCephPrimaryStoragePoolMsg</name>
+        <serviceId>storage.primary</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.primary.APIDeleteCephPrimaryStoragePoolMsg</name>
+        <serviceId>storage.primary</serviceId>
+    </message>
+
+    <message>
+        <name>org.zstack.storage.ceph.primary.APIQueryCephPrimaryStoragePoolMsg</name>
+        <serviceId>query</serviceId>
+    </message>
+</service>

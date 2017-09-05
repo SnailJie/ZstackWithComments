@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UnitTestSuiteConfig xmlns="http://zstack.org/schema/zstack" timeout="600">
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb1"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb2"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb3"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb4"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb5"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb7"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb8"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb9"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb10"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb11"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb12"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb13"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb14"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb15"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb16"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb17"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb18"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb19"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLb20"/>
+    <TestCase class="org.zstack.test.lb.TestVirtualRouterLbPolicy"/>
+</UnitTestSuiteConfig>

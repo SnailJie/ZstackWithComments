@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service xmlns="http://zstack.org/schema/zstack">
+    <id>console</id>
+    <interceptor>ConsoleApiInterceptor</interceptor>
+
+    <message>
+        <name>org.zstack.header.console.APIRequestConsoleAccessMsg</name>
+    </message>
+
+    <message>
+        <name>org.zstack.header.console.APIReconnectConsoleProxyAgentMsg</name>
+    </message>
+
+    <message>
+        <name>org.zstack.header.console.APIQueryConsoleProxyAgentMsg</name>
+        <serviceId>query</serviceId>
+    </message>
+
+</service>

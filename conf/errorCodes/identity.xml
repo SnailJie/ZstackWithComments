@@ -1,0 +1,30 @@
+<error>
+    <prefix>ID</prefix>
+
+    <code>
+        <id>1000</id>
+        <description>Unable to authenticate a user</description>
+    </code>
+
+    <code>
+        <id>1001</id>
+        <description>The session is invalid, either wrong session id or the session has been expired</description>
+    </code>
+
+    <code>
+        <id>1002</id>
+        <description>The user doesn't have permission to perform the operation</description>
+    </code>
+
+    <code>
+        <id>1003</id>
+        <description>The user exceeds a quota of a resource</description>
+    </code>
+
+    <code>
+        <id>1004</id>id>
+        <description>Invalid quota operation</description>>
+    </code>
+    >
+</error>
+

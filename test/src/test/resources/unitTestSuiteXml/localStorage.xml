@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UnitTestSuiteConfig xmlns="http://zstack.org/schema/zstack" timeout="600">
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage1"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage2"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage3"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage4"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage5"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage6"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage7"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage8"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage9"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage10"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage11"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage12"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage13"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage14"/>
+    <!-- disable live migration cases
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage15"/>
+    -->
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage16"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage17"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage18"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage19"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage20"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage21"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage22"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage23"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage24"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage25"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage26"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage27"/>
+    <!-- disable live migration cases
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage28"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage29"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage30"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage31"/>
+    -->
+    <TestCase class="org.zstack.test.storage.primary.local.TestAllocatePsFlow"/>
+
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage32"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage33"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage34"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage35"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage36"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage37"/>
+    <!-- disable live migration cases
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage38"/>
+    -->
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage39"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage40"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage41"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage42"/>
+    <!-- disable live migration cases
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage43"/>
+    -->
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage44"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage45"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage46"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage47"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage48"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage49"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage50"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage51"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage52"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage53"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage54"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage55"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorage56"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestQueryLocalStorage"/>
+    <TestCase class="org.zstack.test.storage.primary.local.TestLocalStorageCreateDataVolume"/>
+</UnitTestSuiteConfig>

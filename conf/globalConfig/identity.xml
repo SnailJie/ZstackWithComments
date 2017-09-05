@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<globalConfig xmlns="http://zstack.org/schema/zstack">
+	<config>
+		<name>session.maxConcurrent</name>
+		<description>Max number of sessions management server accepts. When this limit met, new session will be rejected</description>
+		<defaultValue>500</defaultValue>
+		<category>identity</category>
+		<type>java.lang.Integer</type>
+	</config>
+	<config>
+		<name>session.timeout</name>
+		<description>A timeout period assigned to a session. After timeout, the session will be cleaned out.</description>
+		<defaultValue>7200</defaultValue>
+		<category>identity</category>
+		<type>java.lang.Integer</type>
+	</config>
+	<config>
+		<name>session.cleanup.interval</name>
+		<description>The interval management server checks expired sessions, in seconds</description>
+		<defaultValue>3600</defaultValue>
+		<category>identity</category>
+		<type>java.lang.Integer</type>
+	</config>
+	<config>
+		<name>admin.showAllResource</name>
+		<description>A boolean value indicating whether admin account can see resources of user account</description>
+		<defaultValue>true</defaultValue>
+		<category>identity</category>
+		<type>java.lang.Boolean</type>
+	</config>
+	<config>
+		<name>account.api.control</name>
+		<description>A list of admin-only APIs, split by comma, that the admin allows normal accounts to call</description>
+		<defaultValue>org.zstack.header.storage.backup.APIQueryBackupStorageMsg, org.zstack.storage.backup.sftp.APIQuerySftpBackupStorageMsg, org.zstack.header.image.APIAddImageMsg, org.zstack.header.host.APIQueryHostMsg</defaultValue>
+		<category>identity</category>
+	</config>
+</globalConfig>

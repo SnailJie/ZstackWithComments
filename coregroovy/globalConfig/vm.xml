@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<globalConfig xmlns="http://zstack.org/schema/zstack">
+	<config>
+		<name>dataVolume.deleteOnVmDestroy</name>
+		<description>A boolean value indicating whether deleting attached data volumes when destroying a vm. If false, the data volume will be detached and be retained in primary storage</description>
+		<category>vm</category>
+		<defaultValue>false</defaultValue>
+		<type>java.lang.Boolean</type>
+	</config>
+
+	<config>
+		<name>instanceOffering.setNullWhenDeleting</name>
+        <description>whether update instance offering column of VM inventory to NULL when the instance offering is deleted</description>
+		<category>vm</category>
+		<defaultValue>true</defaultValue>
+		<type>java.lang.Boolean</type>
+	</config>
+
+	<config>
+		<name>deletionPolicy</name>
+        <description>the behavior of deleting a vm, options are [Direct, Delay, Never]. Direct: delete the vm from database and directly delete its root volume; Delay: change the vm's state to Destroyed in database; after the period controlled by 'expungePeriod' passes, delete the vm from database and delete it's root volume; Never: delete the vm from database but never delete its root volume</description>
+		<category>vm</category>
+		<defaultValue>Delay</defaultValue>
+	</config>
+
+	<config>
+		<name>expungePeriod</name>
+        <description>the period before a destroyed vm being deleted from database and before its root volume being deleted from primary storage, in seconds</description>
+		<category>vm</category>
+		<defaultValue>86400</defaultValue>
+		<type>java.lang.Long</type>
+	</config>
+
+	<config>
+		<name>expungeInterval</name>
+        <description>the interval the expunging vm task runs, in seconds</description>
+		<category>vm</category>
+		<defaultValue>3600</defaultValue>
+		<type>java.lang.Long</type>
+	</config>
+
+	<config>
+		<name>cleanTraffic</name>
+		<description>switch for clean spoofing traffic from vm</description>
+		<category>vm</category>
+		<defaultValue>false</defaultValue>
+		<type>java.lang.Boolean</type>
+	</config>
+
+	<config>
+		<name>videoType</name>
+		<description>video type for VM. "cirrus" supply basic video type, the  resolution is not high. "vga" supply more high resolution for VM. "qxl" supply high performance when use SPICE protocal.  Options:[vga, cirrus, qxl]</description>
+		<category>vm</category>
+		<defaultValue>cirrus</defaultValue>
+		<type>java.lang.String</type>
+	</config>
+
+	<config>
+		<category>vm</category>
+		<name>numa</name>
+		<description>whether to use numa structure</description>
+		<type>java.lang.Boolean</type>
+		<defaultValue>false</defaultValue>
+	</config>
+
+	<config>
+		<name>bootMenu</name>
+		<description>whether to enable boot menu</description>
+		<category>vm</category>
+		<defaultValue>true</defaultValue>
+		<type>java.lang.Boolean</type>
+	</config>
+
+	<config>
+		<name>kvmHiddenState</name>
+		<description>hide KVM hypervisor signature to guest</description>
+		<category>vm</category>
+		<defaultValue>false</defaultValue>
+		<type>java.lang.Boolean</type>
+	</config>
+</globalConfig>
