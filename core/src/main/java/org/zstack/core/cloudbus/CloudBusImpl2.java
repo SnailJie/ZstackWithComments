@@ -115,10 +115,10 @@ public class CloudBusImpl2 implements CloudBus, CloudBusIN, ManagementNodeChange
         this.DEFAULT_MESSAGE_TIMEOUT = timeout;
     }
 
-    private void createExchanges() throws IOException {
+    private void createExchanges() throws IOException {   //从channel池中获取到一个通道，给那个通道建立了三种路由声明，然后再放回去。为啥？
         Channel chan = channelPool.acquire();
         try {
-            chan.exchangeDeclare(BusExchange.NO_ROUTE.toString(), BusExchange.NO_ROUTE.getType());
+            chan.exchangeDeclare(BusExchange.NO_ROUTE.toString(), BusExchange.NO_ROUTE.getType());    //RabbitMQ的路由声明，fanout模式
             Map<String, Object> args = map(e("alternate-exchange", (Object) BusExchange.NO_ROUTE.toString()));
             chan.exchangeDeclare(BusExchange.P2P.toString(), BusExchange.P2P.getType(), true, false, args);
             chan.exchangeDeclare(BusExchange.BROADCAST.toString(), BusExchange.BROADCAST.getType());
@@ -1161,12 +1161,13 @@ public class CloudBusImpl2 implements CloudBus, CloudBusIN, ManagementNodeChange
 
     private MessageTracker tracker;
 
+    //CloudBus的初始化方法，在加载的时候自动调用init方法。CloudBus的具体实现是利用RabbitMQ的实现，因此CloudBus的初始化也主要是对RabbitMQ的配置
     void init() {
         trackerClose = CloudBusGlobalProperty.CLOSE_TRACKER;
         serverIps = CloudBusGlobalProperty.SERVER_IPS;
         tracker = new MessageTracker();
 
-        ConnectionFactory connFactory = new ConnectionFactory();
+        ConnectionFactory connFactory = new ConnectionFactory();     //ConnectionFactory用于配置RabbitMQ与broker链接的配置信息
         List<Address> addresses = CollectionUtils.transformToList(serverIps, new Function<Address, String>() {
             @Override
             public Address call(String arg) {
@@ -1194,7 +1195,7 @@ public class CloudBusImpl2 implements CloudBus, CloudBusIN, ManagementNodeChange
                 logger.info(String.format("use RabbitMQ virtual host: %s", CloudBusGlobalProperty.RABBITMQ_VIRTUAL_HOST));
             }
 
-            conn = connFactory.newConnection(addresses.toArray(new Address[]{}));
+            conn = connFactory.newConnection(addresses.toArray(new Address[]{}));    //创建与RabbitMQ的链接
             logger.debug(String.format("rabbitmq connection is established on %s", conn.getAddress()));
 
             ((Recoverable)conn).addRecoveryListener(new RecoveryListener() {
@@ -1204,15 +1205,16 @@ public class CloudBusImpl2 implements CloudBus, CloudBusIN, ManagementNodeChange
                 }
             });
 
-            channelPool = new ChannelPool(CloudBusGlobalProperty.CHANNEL_POOL_SIZE, conn);
-            createExchanges();
+            channelPool = new ChannelPool(CloudBusGlobalProperty.CHANNEL_POOL_SIZE, conn);   //创建了100个通道的连接池
+            createExchanges();    //在一个channel上建立了三种路由，
             outboundQueue = new BusQueue(makeMessageQueueName(SERVICE_ID), BusExchange.P2P);
             Channel chan = channelPool.acquire();
             chan.queueDeclare(outboundQueue.getName(), false, false, true, queueArguments());
             chan.basicConsume(outboundQueue.getName(), true, consumer);
             chan.queueBind(outboundQueue.getName(), outboundQueue.getBusExchange().toString(), outboundQueue.getBindingKey());
             channelPool.returnChannel(chan);
-            maid.construct();
+            //在这儿之下创建了几个队列，具体是用来干啥的现在还不知道
+            maid.construct();     
             noRouteEndPoint.construct();
             tracker.construct();
             tracker.trackService(SERVICE_ID);

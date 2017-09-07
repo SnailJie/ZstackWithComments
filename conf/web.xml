@@ -47,7 +47,7 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 
-    <!-- NOTE: this listener must be put as the first listener to execute, don't change the order !!! -->
+    <!-- NOTE: this listener must be put as the first listener to execute, don't change the order !!! BootstrapWebListener里面只有一条调用的方法，目测是想利用直接调用来使得类加载、初始化-->
     <listener>
         <listener-class>
             org.zstack.portal.managementnode.BootstrapWebListener
@@ -61,7 +61,7 @@
     </listener>
 
 
-<!-- 在这里开始启动Management节点。想看启动过程都做了哪些事情？到ComponentLoaderWebListener里面看看吧 -->
+<!-- 在这里开始启动Management节点。想看启动过程都做了哪些事情？到ComponentLoaderWebListener里面看看吧 。在web容器启动时，会自动加载这个类的初始化方法-->
     <listener>
         <listener-class>
             org.zstack.portal.managementnode.ComponentLoaderWebListener
