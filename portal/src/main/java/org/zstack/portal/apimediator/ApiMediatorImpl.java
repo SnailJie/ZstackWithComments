@@ -31,6 +31,13 @@ import java.util.Map;
 import static org.zstack.utils.CollectionDSL.e;
 import static org.zstack.utils.CollectionDSL.map;
 
+
+
+/*
+ * RenJie：这个类主要要就是消息的中转器，这里可以进行消息的最初的处理，进行分发，是属于基础组件，因此需要在刚启动节点的时候注册到消息总线上去
+ * 在初始化的时候，消息处理器会去读取文件夹里的xml文件，里面写着当前支持哪些消息
+ */
+
 public class ApiMediatorImpl extends AbstractService implements ApiMediator, GlobalApiMessageInterceptor {
     private static final CLogger logger = Utils.getLogger(ApiMediator.class);
 

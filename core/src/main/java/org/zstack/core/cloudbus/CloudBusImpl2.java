@@ -71,7 +71,7 @@ public class CloudBusImpl2 implements CloudBus, CloudBusIN, ManagementNodeChange
     private ThreadFacade thdf;
     @Autowired
     private PluginRegistry pluginRgty;
-    @Autowired
+    @Autowired  
     private JmxFacade jmxf;
     @Autowired
     private EventFacade evtf;
@@ -2413,7 +2413,7 @@ public class CloudBusImpl2 implements CloudBus, CloudBusIN, ManagementNodeChange
     }
 
     private void populateExtension() {
-        services = pluginRgty.getExtensionList(Service.class);
+        services = pluginRgty.getExtensionList(Service.class);    //这玩意儿到底是怎么操作的……反正是获取到当前有哪些服务
         for (ReplyMessagePreSendingExtensionPoint extp : pluginRgty.getExtensionList(ReplyMessagePreSendingExtensionPoint.class)) {
             List<Class> clazzs = extp.getReplyMessageClassForPreSendingExtensionPoint();
             if (clazzs == null || clazzs.isEmpty()) {
@@ -2436,20 +2436,22 @@ public class CloudBusImpl2 implements CloudBus, CloudBusIN, ManagementNodeChange
         }
     }
 
+    //牛逼了！这里要启动cloudBus了！
     @Override
     public boolean start() {
         populateExtension();
-        prepareStatistics();
+        prepareStatistics(); //RJ：将需要回复的消息放入统计容器里，监控消息的回复时间
 
         for (Service serv : services) {
             assert serv.getId() != null : String.format("service id can not be null[%s]", serv.getClass().getName());
-            registerService(serv);
+            registerService(serv);    //注册服务到总线上去，实际上是在MQ上新加一个该消息的队列
         }
 
-        jmxf.registerBean("CloudBus", this);
+        jmxf.registerBean("CloudBus", this);   //JMX，将CloudBus管理起来
 
         return true;
     }
+    //其实初始化CLoudBus,其实就是读取有哪些service，然后将这些service在MQ上新建通道
 
     private void prepareStatistics() {
         List<Class> needReplyMsgs = BeanUtils.scanClassByType("org.zstack", NeedReplyMessage.class);
@@ -2459,7 +2461,7 @@ public class CloudBusImpl2 implements CloudBus, CloudBusIN, ManagementNodeChange
                 return !APIMessage.class.isAssignableFrom(arg) || APISyncCallMessage.class.isAssignableFrom(arg) ? arg : null;
             }
         });
-
+          //RJ:把需要回复的消息放入统计的容器里面，MessageStatistic里面包含了一些关于时间的属性，目测是想监控消息的调用耗时、响应耗时等等
         for (Class clz : needReplyMsgs) {
             MessageStatistic stat = new MessageStatistic();
             stat.setMessageClassName(clz.getName());

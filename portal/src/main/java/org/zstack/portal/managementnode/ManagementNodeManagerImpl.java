@@ -369,11 +369,11 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
                     trigger.next();
                 }
             }).then(new Flow() {
-                String __name__ = "register-node-on-cloudbus";
+                String __name__ = "register-node-on-cloudbus";   
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
-                    bus.registerService(self);
+                    bus.registerService(self);                 //RenJie: 把管理节点作为微服务中的服务加入他的消息总线
                     trigger.next();
                 }
 
@@ -383,7 +383,7 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
                     trigger.rollback();
                 }
             }).then(new Flow() {
-                String __name__ = "start-components";
+                String __name__ = "start-components";      //RenJie:把刚才的注册的组件都启动起来
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
@@ -401,17 +401,17 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
-                    callPrepareDbExtensions();
+                    callPrepareDbExtensions();      //RenJie: 初始化数据库，包括几个方面，如账户啊，虚拟网络等等
                     trigger.next();
                 }
             }).then(new Flow() {
-                String __name__ = "create-DB-record";
+                String __name__ = "create-DB-record";              //RenJie： 把管理节点的信息持久化到数据库中
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
                     ManagementNodeVO vo = new ManagementNodeVO();
                     vo.setHostName(Platform.getManagementServerIp());
-                    vo.setUuid(Platform.getManagementServerId());
+                    vo.setUuid(Platform.getManagementServerId()); 
                     node = dbf.persistAndRefresh(vo);
                     trigger.next();
                 }
@@ -425,20 +425,20 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
                     trigger.rollback();
                 }
             }).then(new NoRollbackFlow() {
-                String __name__ = "start-heartbeat";
+                String __name__ = "start-heartbeat";          //RenJie：开启心跳监测。其实就是后台线程不断地在数据库中查询节点的状态是否是running
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
-                    setupHeartbeat();
+                    setupHeartbeat();                
                     trigger.next();
                 }
             }).then(new Flow() {
-                String __name__ = "start-api-mediator";
+                String __name__ = "start-api-mediator";         //RJ: 这步就是把API组件注册到消息总线上去，可以用于消息的转发接受处理
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
-                    apim.start();
-                    trigger.next();
+                    apim.start();          
+                    trigger.next(); 
                 }
 
                 @Override
@@ -456,7 +456,7 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
                     trigger.next();
                 }
             }).then(new NoRollbackFlow() {
-                String __name__ = "I-join";
+                String __name__ = "I-join";     //这个看的就不是很懂了【一致性hash，加入hash环里？】
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
@@ -467,7 +467,7 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
                 String __name__ = "node-is-ready";
 
                 @Override
-                public void run(FlowTrigger trigger, Map data) {
+                public void run(FlowTrigger trigger, Map data) {          //讲道理，这个操作我有点看不明白【怎么获取的这个list？】
                     for (ManagementNodeReadyExtensionPoint ext : pluginRgty.getExtensionList(ManagementNodeReadyExtensionPoint.class)) {
                         ext.managementNodeReady();
                     }
@@ -475,7 +475,7 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
                     trigger.next();
                 }
             }).then(new NoRollbackFlow() {
-                String __name__ = "listen-node-life-cycle-events";
+                String __name__ = "listen-node-life-cycle-events";          //监听节点的生命周期事件
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
@@ -483,7 +483,7 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
                     trigger.next();
                 }
             }).then(new NoRollbackFlow() {
-                String __name__ = "say-I-join";
+                String __name__ = "say-I-join";      //向总线上发布管理节点已经接入且准备就绪
 
                 @Override
                 public void run(FlowTrigger trigger, Map data) {
@@ -529,7 +529,7 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
 
         logger.info("Management node: " + getId() + " starts successfully");
 
-        synchronized (this) {
+        synchronized (this) {                        //RJ：当节点一直在运行的时候，在这儿循环住。一旦发现不在运行，就从容地关闭节点，释放资源，而不是野蛮关闭
             isNodeRunning = NODE_RUNNING;
             while (isRunning) {
                 try {
@@ -543,7 +543,19 @@ public class ManagementNodeManagerImpl extends AbstractService implements Manage
         logger.debug("quited main-loop, start stopping management node");
         stop();
         return true;
-    }
+    } 
+    /*
+     * 至此，管理节点启动结束，zstack后台核心正式开始运行。这里我们进行一下总结。
+     * managementnode启动过程中，会做以下步骤：
+     * 初始化云总线\启动各种组件\把管理节点作为微服务中的服务加入他的消息总线\
+     * 把刚才的注册的组件都启动起来\初始化数据库\把管理节点的信息持久化到数据库中\
+     * 开启心跳监测\把API组件注册到消息总线上去\开启监控管理节点的生命状态、发布管理节点已经就绪的信息。
+     * 
+     * 其中比较核心的，我觉得一个是消息总线，一个是API组件。
+     * 消息总线起来了，那么整套核心部分就可以进行消息传递，进行微服务传递。而API组件是进行消息的注册以及转发的。因此也非常重要。
+     * 
+     * 这样，ManagementNode就处于运行中，等待来自dashboard的请求了
+     */
 
     private void setupHeartbeat() {
         ManagementNodeGlobalConfig.NODE_HEARTBEAT_INTERVAL.installUpdateExtension(new GlobalConfigUpdateExtensionPoint() {

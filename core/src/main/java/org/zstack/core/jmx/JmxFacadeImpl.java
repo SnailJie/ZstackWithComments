@@ -20,7 +20,7 @@ public class JmxFacadeImpl implements JmxFacade {
     }
 
     void init() {
-        mBeanServer = ManagementFactory.getPlatformMBeanServer();
+        mBeanServer = ManagementFactory.getPlatformMBeanServer();    //新建MBeanServer
         if (!isEnabled()) {
             logger.warn(String.format("unable to find a mBeanServer, JMX function will be disabled"));
         }

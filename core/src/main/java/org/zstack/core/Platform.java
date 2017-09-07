@@ -532,7 +532,7 @@ public class Platform {
 		 * causes the static block to be executed, which results in cycle initialization of ComponentLoaderImpl.
 		 */
         if (loader == null) {
-            loader = createComponentLoaderFromWebApplicationContext(null);
+            loader = createComponentLoaderFromWebApplicationContext(null);    //这一步里面启动了cloudbus
         }
 
         return loader;
