@@ -20,6 +20,18 @@ public class RestServerController {
     @Autowired
     private RestServer server;
 
+    /****
+     * Handles all REST API requests and delegates processing to the RestServer.
+     *
+     * Sets a request attribute "info" containing a test map before forwarding the request and response to the RestServer for handling.
+     *
+     * @param request the incoming HTTP request
+     * @param response the HTTP response to be sent
+     * @throws IOException if an I/O error occurs during request handling
+     * @throws IllegalAccessException if the underlying method is inaccessible
+     * @throws NoSuchMethodException if a required method cannot be found
+     * @throws InvocationTargetException if the underlying method throws an exception
+     */
     @RequestMapping(
             value = RestConstants.ALL_PATH,
             method = {
