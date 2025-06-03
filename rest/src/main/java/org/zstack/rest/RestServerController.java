@@ -29,6 +29,7 @@ public class RestServerController {
             }
     )
     public void api(HttpServletRequest request, HttpServletResponse response) throws IOException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        server.handle(request, response)
+        server.handle(request, response);
+        Map<String,String> testInfl = new HashMap<>();
     }
 }
