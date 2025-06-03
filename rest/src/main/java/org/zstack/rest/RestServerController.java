@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.zstack.header.rest.RESTConstant;
-
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -27,6 +29,6 @@ public class RestServerController {
             }
     )
     public void api(HttpServletRequest request, HttpServletResponse response) throws IOException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        server.handle(request, response);
+        server.handle(request, response)
     }
 }
