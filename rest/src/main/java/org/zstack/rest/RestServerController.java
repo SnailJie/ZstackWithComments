@@ -5,12 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.zstack.header.rest.RESTConstant;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.Date;
+import java.lang.reflect.InvocationTargetException;
 /**
  * Created by xing5 on 2016/12/7.
  */
@@ -27,6 +28,11 @@ public class RestServerController {
             }
     )
     public void api(HttpServletRequest request, HttpServletResponse response) throws IOException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Map<String,String> testInfo = new HashMap<>();
+        testInfo.put("A","good");
+        request.setAttribute("info",testInfo);
         server.handle(request, response);
+
+
     }
 }
